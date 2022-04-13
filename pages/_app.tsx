@@ -36,8 +36,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     store.dispatch(setLoading(true))
-
-    const userData = localStorage.getItem('user')
+    const userString = localStorage.getItem('user')
+    const userData = userString && userString.length > 0 ? JSON.parse(userString) : undefined
 
     const token = localStorage.getItem('token')
     if (token && userData && !store.getState().auth.loggedIn) {
@@ -46,7 +46,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       store.dispatch(addToken(token))
     }
     if (!token && userData) {
-      store.dispatch(addUser({}))
+      store.dispatch(addUser())
       store.dispatch(setLoginState(false))
       localStorage.removeItem('user')
     }

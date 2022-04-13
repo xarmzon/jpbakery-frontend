@@ -3,10 +3,10 @@ import React from 'react'
 import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa'
 const Footer = () => {
   return (
-    <footer className="w-full border-t-2 border-t-primary-d1/60 bg-primary-t1/50 p-5 py-12">
+    <footer className="w-full border-t-2 border-t-primary-d1/60 bg-primary-t1/50 p-5 py-8">
       <div className="container">
         <div className=" mx-auto max-w-lg text-center text-sm lg:text-base">
-          This project is designed for {APP_NAME} &copy;
+          This is a project designed for {APP_NAME} &copy;
           {new Date().getFullYear()} JP. All rights reserved. Designed by{' '}
           <a
             href="https://www.linkedin.com/in/rastarm/"

@@ -3,7 +3,13 @@ import SubTitle from '@components/common/SubTitle'
 import Title from '@components/common/Title'
 import { APP_NAME } from '@utils/constants'
 import React from 'react'
-import { BiRadar, BiMapPin, BiGift, BiGitRepoForked } from 'react-icons/bi'
+import {
+  BiRadar,
+  BiMapPin,
+  BiGift,
+  BiGitRepoForked,
+  BiHeartCircle,
+} from 'react-icons/bi'
 const cardData = [
   {
     icon: <BiGift />,
@@ -18,12 +24,17 @@ const cardData = [
   {
     icon: <BiRadar />,
     title: 'Quality',
-    desc: 'A lot of filling with lot of quality. The cake will be a whole lot of filling',
+    desc: 'All of our products are made with the finest quality ingredients and guaranteed fresh.',
   },
   {
     icon: <BiMapPin />,
     title: 'Indoor Delivery',
-    desc: 'A lot of filling with lot of quality. The cake will be a whole lot of filling',
+    desc: 'We are very punctual and promise to deliver fresh made products to every customer on time',
+  },
+  {
+    icon: <BiHeartCircle />,
+    title: 'Bake With Love',
+    desc: 'We are passionate about baking. Each of our handmade items are carefully baked with love.',
   },
 ]
 
@@ -31,13 +42,13 @@ const About = () => {
   return (
     <section
       id="about"
-      className="relative mt-8 h-full w-full overflow-x-hidden py-8"
+      className="relative h-full w-full overflow-x-hidden pb-8"
     >
       <div className="container pt-8">
         <Title text={`Why ${APP_NAME}`} />
         <SubTitle text=" Every cake is made and designed to suit your taste and style" />
         <div className="mt-8">
-          <div className="mx-auto grid w-[95%] max-w-lg gap-y-8 sm:grid-cols-2 sm:gap-8 lg:max-w-3xl lg:grid-cols-3 xl:max-w-4xl">
+          <div className="mx-auto grid w-[95%] max-w-xl gap-y-8 sm:grid-cols-2 sm:gap-8 lg:max-w-3xl lg:grid-cols-3 xl:max-w-4xl">
             {cardData.map((card, i) => (
               <div
                 key={i}

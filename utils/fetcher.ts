@@ -3,7 +3,7 @@ import axios from 'axios'
 const api = axios.create()
 
 api.defaults.baseURL =
-  process.env.NEXT_PUBLIC_API_ENDPOINT || 'http://localhost:3000/api/v1/'
+  process.env.NEXT_PUBLIC_API_ENDPOINT || 'http://localhost:8000/api/v1/'
 
 api.interceptors.response.use(
   (res) => {

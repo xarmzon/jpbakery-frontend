@@ -7,5 +7,5 @@
 }
 
 #nprogress .bar {
-  @apply bg-primary;
+  @apply bg-secondary-t4;
 }

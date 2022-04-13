@@ -26,6 +26,7 @@ module.exports = {
       },
       backgroundImage: {
         image1: 'url(/images/cake_image1.jpg)',
+        image2: 'url(/images/photos-by-lanty-3962cSRPwOo-unsplash.jpg)',
         cupcake: 'url(/images/sara-cervera-zEwgRzJJIvk-unsplash.jpg)',
       },
       colors: {
@@ -49,6 +50,7 @@ module.exports = {
           d3: '#0e0f22',
         },
         white: {
+          DEFAULT: "#fff",
           light: '#fbfffe',
           x100: '#f5f7fb',
           x200: '#f5f7f9',
