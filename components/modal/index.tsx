@@ -53,7 +53,7 @@ const RequestModal = () => {
         cakeSize: "sm",
         deliveryDate: "",
         deliveryAddress: "",
-        charges: 0,
+        charges: 10000,
         nameOnCake: "",
     });
     const [orderId, setOrderId] = useState<string>("")
@@ -68,7 +68,7 @@ const RequestModal = () => {
       Object.entries(formData).forEach(([key, val])=>{
           setFormData(prev=>({
               ...prev,
-              [key]: typeof val === "number"? 0 : key === "cakeSize"? "sm" : ""
+              [key]: typeof val === "number"? 0 : ""
           }))
       })
       if(showUploadSpinner)setShowUploadSpinner(false)

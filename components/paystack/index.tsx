@@ -6,6 +6,7 @@ import api from "@utils/fetcher";
 import toast from "react-hot-toast";
 import { formatPrice } from "@utils/index";
 import Image from "next/image";
+import Loader from "@components/Loader";
 
 
 export interface PaystackProps {
@@ -37,7 +38,7 @@ const PaystackPayment = ({
       .replace("-", "")
       .replace(":", "")
       .split("Z")[0];
-    return APP_NAME + "-" + ref;
+    return APP_NAME.split(" ")[0] + "-" + ref;
   });
 
   const makePayment = usePaystackPayment({
@@ -89,8 +90,6 @@ const PaystackPayment = ({
     }
   };
 
-
-
   const verifyPayment = async () => {
     setPaymentText("Validating...");
     try {
@@ -106,6 +105,7 @@ const PaystackPayment = ({
   };
 
   const updatePayment = async () => {
+      
     try {
       const { data } = await api.patch(`${ROUTES.API.PAYMENT}`, {
         reference: refNum,
@@ -131,13 +131,20 @@ const PaystackPayment = ({
       >
         {paymentText}
       </button>
-     <div className="h-8 w-16 relative">
+      {
+          paymentText.includes(".") && (
+            <div className="">
+            <Loader text={paymentText}/>
+        </div>
+          )
+      }
+     <div className="h-12 w-full relative">
 
       <Image
       alt="paystack"
       layout="fill"
       objectFit="contain"
-        src="/assets/images/paystack-badge-cards-ngn.png"
+        src="/images/paystack-badge-cards-ngn.png"
       />
      </div>
     </div>
