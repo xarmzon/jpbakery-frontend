@@ -45,7 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       store.dispatch(setLoginState(true))
       store.dispatch(addToken(token))
     }
-    if (!token && userData) {
+    if (!token && userData || token && !userData) {
       store.dispatch(addUser())
       store.dispatch(setLoginState(false))
       localStorage.removeItem('user')

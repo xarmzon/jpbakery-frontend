@@ -18,10 +18,10 @@ export interface SelectProps extends DetailedHTMLProps<SelectHTMLAttributes<HTML
 }
 
 const Select = (props: SelectProps) => {
-    const {error, options, labelClass, labelValue, id, default_, ...rest} = props
+    const {error, options, showLabel, labelClass, labelValue, id, default_, ...rest} = props
   return (
     <div className="flex flex-col space-y-2">
-      {props.showLabel && (
+      {showLabel && (
         <label
           htmlFor={id}
           className={`text-sm md:text-md ${labelClass} ${

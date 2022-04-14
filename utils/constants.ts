@@ -28,10 +28,19 @@ export const ROUTES = {
   ACCOUNT: {
     LOGIN: '/account/login',
     SIGNUP: '/account/signup',
+    LOGOUT: "/account/logout"
+  },
+  DASHBOARD:{
+    OVERVIEW: "/dashboard",
+    ORDERS: "/dashboard/orders",
+    RECEIPTS: "/dashboard/receipts",
+    PROFILE: "/dashboard/profile",
   },
   API: {
     LOGIN: "auth/login",
     SIGNUP: "auth/signup",
+    USER: "user/",
+    ORDER: "order/"
   }
 }
 

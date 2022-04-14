@@ -1,11 +1,13 @@
+import authReducer from '@redux/slice/auth'
+import dashboardReducer from '@redux/slice/dashboard'
 import { configureStore } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
-import authReducer from '../slice/auth'
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
+    dashboard: dashboardReducer
   },
 })
 

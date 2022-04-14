@@ -7,6 +7,10 @@ export type AuthSlice = {
   loggedIn: boolean
   loading: boolean
 }
+export type DashboardSlice = {
+  navOpen: boolean
+  modalOpen:boolean
+}
 
 export type NavLink = {
   icon?: React.ReactNode
@@ -20,6 +24,21 @@ export type User = {
   email: string
   picture: string
 }
+
+export type Order = {
+  _id: string;
+  user: User;
+  sampleCakeImage: string;
+  cakeColors: string;
+  cakeSize: "sm" | "md" | "lg";
+  deliveryDate: string;
+  charges: number;
+  deliveryAddress: string;
+  nameOnCake: string;
+  createdAt: string;
+};
+
+export type NewOrderForm = Omit<Order, "createdAt" | "user"|"_id">
 
 export type LoggedInUser = User & {
   role: number,

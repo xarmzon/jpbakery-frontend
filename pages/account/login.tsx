@@ -44,14 +44,12 @@ const LoginPage:NextPage = () => {
    try {
     const {data} = await api.post(ROUTES.API.LOGIN, {...formData})
     toast.success(data.msg)
-    console.log(data)
     localStorage.setItem("user", JSON.stringify(data?.user))
     localStorage.setItem("token", data?.token)
     dispatch(addToken(data?.token))
     dispatch(addUser(data?.user))
     dispatch(setLoginState(true))
-    dispatch(setLoading(true))
-    //setTimeout(()=>router.push("/"), 2000)
+    router.push(ROUTES.DASHBOARD.OVERVIEW)
    } catch (err:any) {
      toast.error(getErrorMessage(err))
    }
