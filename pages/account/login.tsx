@@ -11,58 +11,62 @@ import React, { FormEvent, useState } from 'react'
 import toast from 'react-hot-toast'
 import { BiLock, BiMailSend } from 'react-icons/bi'
 import { useAppDispatch } from '@redux/store'
-import { addToken, addUser, setLoading, setLoginState } from '@redux/slice/auth'
+import { addToken, addUser, setLoginState } from '@redux/slice/auth'
 
-const login = "Login"
-const LoginPage:NextPage = () => {
+const login = 'Login'
+const LoginPage: NextPage = () => {
   const dispatch = useAppDispatch()
   const router = useRouter()
-  const [submitText, setSubmitText] = useState(login);
+  const [submitText, setSubmitText] = useState(login)
   const [formData, setFormData] = useState<LoginForm>({
-    username: "",
-    email: "",
-    password: "",
-  });
-  const [errors, setErrors] = useState<LoginForm>(
-    ()=>Object.assign({}, ...Object.keys(formData).map(key=>({
-    [key]: ""
-  }))))
+    username: '',
+    email: '',
+    password: '',
+  })
+  const [errors, setErrors] = useState<LoginForm>(() =>
+    Object.assign(
+      {},
+      ...Object.keys(formData).map((key) => ({
+        [key]: '',
+      }))
+    )
+  )
 
-  const handleChange = (e: FormEvent<HTMLInputElement>)=>{
-    const key = e.currentTarget.name 
-    const val = e.currentTarget.value 
+  const handleChange = (e: FormEvent<HTMLInputElement>) => {
+    const key = e.currentTarget.name
+    const val = e.currentTarget.value
     setFormData((prev) => {
-      return { ...prev, [key]: val };
-    });
+      return { ...prev, [key]: val }
+    })
     const err = errors[key as keyof LoginForm]
-    if(err && err.length > 0) setErrors(prev=>({...prev, [key]: ""}))
+    if (err && err.length > 0) setErrors((prev) => ({ ...prev, [key]: '' }))
   }
-  const handleSubmit = async (e:FormEvent<HTMLFormElement>)=>{
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if(submitText !== login) return;
-    setSubmitText("Loading...")
-   try {
-    const {data} = await api.post(ROUTES.API.LOGIN, {...formData})
-    toast.success(data.msg)
-    localStorage.setItem("user", JSON.stringify(data?.user))
-    localStorage.setItem("token", data?.token)
-    dispatch(addToken(data?.token))
-    dispatch(addUser(data?.user))
-    dispatch(setLoginState(true))
-    router.push(ROUTES.DASHBOARD.OVERVIEW)
-   } catch (err:any) {
-     toast.error(getErrorMessage(err))
-   }
-   setSubmitText(login)
+    if (submitText !== login) return
+    setSubmitText('Loading...')
+    try {
+      const { data } = await api.post(ROUTES.API.LOGIN, { ...formData })
+      toast.success(data.msg)
+      localStorage.setItem('user', JSON.stringify(data?.user))
+      localStorage.setItem('token', data?.token)
+      dispatch(addToken(data?.token))
+      dispatch(addUser(data?.user))
+      dispatch(setLoginState(true))
+      router.push(ROUTES.DASHBOARD.OVERVIEW)
+    } catch (err: any) {
+      toast.error(getErrorMessage(err))
+    }
+    setSubmitText(login)
   }
 
-  return <AuthLayout title="Login">
-    <div className="p-5 flex flex-col justify-center h-full w-full space-y-5">
-      <h1 className="font-bold text-2xl text-slate-700 text-center">Login</h1>
-      <div className="">
-        <form className='flex flex-col space-y-7' onSubmit={handleSubmit}>
-          
-          <div className="flex flex-col">
+  return (
+    <AuthLayout title="Login">
+      <div className="flex h-full w-full flex-col justify-center space-y-5 p-5">
+        <h1 className="text-center text-2xl font-bold text-slate-700">Login</h1>
+        <div className="">
+          <form className="flex flex-col space-y-7" onSubmit={handleSubmit}>
+            <div className="flex flex-col">
               <Input
                 showLabel
                 labelValue="Email"
@@ -73,11 +77,11 @@ const LoginPage:NextPage = () => {
                 placeholder=""
                 onChange={handleChange}
                 error={errors.email}
-                leftIcon={<BiMailSend/>}
+                leftIcon={<BiMailSend />}
                 disabled={submitText !== login}
               />
-          </div>
-          <div className="flex flex-col">
+            </div>
+            <div className="flex flex-col">
               <Input
                 showLabel
                 labelValue="Password"
@@ -88,12 +92,12 @@ const LoginPage:NextPage = () => {
                 placeholder=""
                 onChange={handleChange}
                 error={errors.password}
-                leftIcon={<BiLock/>}
+                leftIcon={<BiLock />}
                 disabled={submitText !== login}
               />
-          </div>
-         
-          <div className="text-center mb-5">
+            </div>
+
+            <div className="mb-5 text-center">
               <Input
                 type="submit"
                 value={submitText}
@@ -102,16 +106,21 @@ const LoginPage:NextPage = () => {
               />
               <div className="mt-2">
                 <p className="text-xs md:text-sm">
-                  Or{" "}
-                  <Button linkClassName='text-secondary hover:text-ascent-light' isLink href={ROUTES.ACCOUNT.SIGNUP} text="Register Here"/>
-                  
+                  Or{' '}
+                  <Button
+                    linkClassName="text-secondary hover:text-ascent-light"
+                    isLink
+                    href={ROUTES.ACCOUNT.SIGNUP}
+                    text="Register Here"
+                  />
                 </p>
               </div>
             </div>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
-  </AuthLayout>
+    </AuthLayout>
+  )
 }
 
 export default LoginPage

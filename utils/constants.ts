@@ -28,21 +28,21 @@ export const ROUTES = {
   ACCOUNT: {
     LOGIN: '/account/login',
     SIGNUP: '/account/signup',
-    LOGOUT: "/account/logout"
+    LOGOUT: '/account/logout',
   },
-  DASHBOARD:{
-    OVERVIEW: "/dashboard",
-    ORDERS: "/dashboard/orders",
-    RECEIPTS: "/dashboard/receipts",
-    PROFILE: "/dashboard/profile",
+  DASHBOARD: {
+    OVERVIEW: '/dashboard',
+    ORDERS: '/dashboard/orders',
+    RECEIPTS: '/dashboard/receipts',
+    PROFILE: '/dashboard/profile',
   },
   API: {
-    LOGIN: "auth/login",
-    SIGNUP: "auth/signup",
-    USER: "user/",
-    ORDER: "order/",
-    PAYMENT: "payment/",
-  }
+    LOGIN: 'auth/login',
+    SIGNUP: 'auth/signup',
+    USER: 'user/',
+    ORDER: 'order/',
+    PAYMENT: 'payment/',
+  },
 }
 
 export const USER_TYPES_TEXT = ['Client', 'Admin']
