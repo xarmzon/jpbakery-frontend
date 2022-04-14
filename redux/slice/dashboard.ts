@@ -23,6 +23,12 @@ const dashboardSlice = createSlice({
     toggleModal: (state, action: PayloadAction<DashboardSlice['modal']>) => {
       state.modal = action.payload
     },
+    setModalType: (
+      state,
+      action: PayloadAction<DashboardSlice['modal']['type_']>
+    ) => {
+      state.modal.type_ = action.payload
+    },
     setPayment: (state, action: PayloadAction<DashboardSlice['payment']>) => {
       state.payment = action.payload
     },
@@ -32,7 +38,7 @@ const dashboardSlice = createSlice({
   },
 })
 
-export const { toggleNav, toggleModal, setPayment, setReceipt } =
+export const { toggleNav, toggleModal, setPayment, setReceipt, setModalType } =
   dashboardSlice.actions
 
 const dashboardReducer = dashboardSlice.reducer

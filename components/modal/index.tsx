@@ -46,6 +46,17 @@ const DashboardModal = () => {
     }
   }
 
+  const selectTitle = () => {
+    switch (modal.type_) {
+      case 'request':
+        return 'Cake Request Form'
+      case 'payment':
+        return 'Payment'
+      case 'receipt':
+        return 'Receipt - Order Details'
+    }
+  }
+
   return (
     <Modal
       ariaHideApp={false}
@@ -55,7 +66,7 @@ const DashboardModal = () => {
     >
       <div className="relative flex h-[80vh] max-h-[450px] w-[95vw] max-w-[350px] flex-col justify-center overflow-hidden rounded-2xl bg-gradient-to-b  from-primary/50 to-slate-900/60 text-primary shadow-lg backdrop-blur-[4px] sm:max-w-[380px] lg:max-h-[650px] lg:max-w-[480px] lg:space-y-2">
         <div className="fixed right-0 top-0 left-0 z-[9] flex h-12 w-full items-center justify-between bg-white px-3 lg:h-16">
-          <span className="text-lg lg:text-2xl">Cake Request Form</span>
+          <span className="text-lg lg:text-2xl">{selectTitle()}</span>
           <HiXCircle
             className="cursor-pointer text-2xl text-red-700 lg:text-4xl"
             onClick={onRequestClose}

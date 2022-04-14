@@ -4,19 +4,13 @@ import { getErrorMessage } from '@utils/index'
 import { ALLOWED_FILE_SIZE_DP, ROUTES } from '@utils/constants'
 import api from '@utils/fetcher'
 import { NewOrderForm } from '@utils/types'
-import React, {
-  ChangeEvent,
-  FormEvent,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import React, { ChangeEvent, FormEvent, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import { BiPencil } from 'react-icons/bi'
 import Select from '@components/common/controls/Select'
 import Image from 'next/image'
 import { FaFan } from 'react-icons/fa'
-import { setPayment, toggleModal } from '@redux/slice/dashboard'
+import { setModalType, setPayment } from '@redux/slice/dashboard'
 
 const sendRequest = 'Send Request'
 const RequestModal = () => {
@@ -35,18 +29,6 @@ const RequestModal = () => {
     charges: 10000,
     nameOnCake: '',
   })
-
-  useEffect(() => {
-    return () => {
-      Object.entries(formData).forEach(([key, val]) => {
-        setFormData((prev) => ({
-          ...prev,
-          [key]: typeof val === 'number' ? 0 : '',
-        }))
-      })
-      if (showUploadSpinner) setShowUploadSpinner(false)
-    }
-  }, [formData, showUploadSpinner])
 
   const showImagePicker = () => {
     if (showUploadSpinner || submitText !== sendRequest) return
@@ -94,17 +76,11 @@ const RequestModal = () => {
           },
         })
       )
-      dispatch(
-        toggleModal({
-          open: true,
-          type_: 'payment',
-        })
-      )
+      dispatch(setModalType('payment'))
     } catch (error) {
       toast.error(getErrorMessage(error))
-      console.log(error)
+      setSubmitText(sendRequest)
     }
-    setSubmitText(sendRequest)
   }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

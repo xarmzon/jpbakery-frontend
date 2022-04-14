@@ -109,7 +109,7 @@ const PaystackPayment = ({
         status: true,
       })
       setPaymentSuccessfulText('Payment successful. Your order is complete')
-      setTimeout(() => onComplete(data.msg), 3000)
+      setTimeout(() => onComplete(refNum), 3000)
     } catch (e) {
       toast.error('Failed to update Payment status')
     }
@@ -119,7 +119,7 @@ const PaystackPayment = ({
       {paymentText === 'Done' ? (
         <div className="my-5 flex w-full flex-1 flex-col items-center justify-center space-y-3 text-center text-6xl text-green-success">
           <BiCheckCircle />
-          <span className="">{paymentSuccessfulText}</span>
+          <span className="text-lg">{paymentSuccessfulText}</span>
         </div>
       ) : (
         <>

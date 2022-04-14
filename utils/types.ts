@@ -19,9 +19,8 @@ export type Payment = {
   order: NewOrder & { id: string }
 }
 
-export type Receipt = {
-  cost?: number
-  order?: Payment['order']
+export type Receipt = Partial<Payment['order']> & {
+  reference: string
 }
 
 export type DashboardSlice = {

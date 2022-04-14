@@ -1,19 +1,19 @@
 import PaystackPayment from '@components/paystack'
-import { setReceipt, toggleModal } from '@redux/slice/dashboard'
+import { setModalType, setReceipt } from '@redux/slice/dashboard'
 import { useAppDispatch, useAppSelector } from '@redux/store'
 import React from 'react'
 
 const PaymentModal = () => {
   const payment = useAppSelector((state) => state.dashboard.payment)
   const dispatch = useAppDispatch()
-  const handleShowReceipt = () => {
+  const handleShowReceipt = (ref: string) => {
     dispatch(
       setReceipt({
-        cost: payment?.amount,
-        order: payment?.order,
+        ...payment?.order,
+        reference: ref,
       })
     )
-    dispatch(toggleModal({ open: true, type_: 'receipt' }))
+    dispatch(setModalType('receipt'))
   }
   const initPayment = () => {
     if (payment) {
