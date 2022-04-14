@@ -131,7 +131,8 @@ const PaystackPayment = ({
             {formatPrice(amount / 100)}
           </p>
           <p className="text-center text-xs font-bold text-secondary md:text-sm">
-            Reference Number<span className="block italic">{refNum}</span>
+            Reference Number
+            <span className="block italic text-secondary-d1">{refNum}</span>
           </p>
 
           {!paymentText.includes('.') ? (
