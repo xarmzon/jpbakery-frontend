@@ -69,7 +69,8 @@ const PaystackPayment = ({
         try {
           const { data } = await api.post(`${ROUTES.API.PAYMENT}`, {
             reference: refNum,
-
+            order:orderId,
+            charges: amount
           });
           // console.log(data);
           //make payment
