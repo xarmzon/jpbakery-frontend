@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { formatPrice } from "@utils/index";
 import Image from "next/image";
 import Loader from "@components/Loader";
+import Button from "@components/Button";
 
 
 export interface PaystackProps {
@@ -125,13 +126,19 @@ const PaystackPayment = ({
       <p className="text-xs md:text-sm text-center font-bold text-secondary">
         Reference Number<span className="block italic">{refNum}</span>
       </p>
-      <button
+      {
+          !paymentText.includes(".") && 
+      <Button 
+        text={paymentText}
         onClick={performPayment}
+      />
+      }
+      {/* <button
         type="button"
-        className="py-2 px-4 bg-primary text-primary-100 hover:bg-ascent-light hover:text-primary transition duration-500"
+        className="py-2 px-4 bg-primary text-white hover:bg-white hover:text-primary transition duration-500"
       >
-        {paymentText}
-      </button>
+        {} 
+      </button> */}
       {
           paymentText.includes(".") && (
             <div className="">
