@@ -40,7 +40,8 @@ export const ROUTES = {
     LOGIN: "auth/login",
     SIGNUP: "auth/signup",
     USER: "user/",
-    ORDER: "order/"
+    ORDER: "order/",
+    PAYMENT: "payment/",
   }
 }
 

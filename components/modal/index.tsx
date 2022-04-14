@@ -12,6 +12,8 @@ import toast from 'react-hot-toast'
 import { ALLOWED_FILE_SIZE_DP, ROUTES } from '@utils/constants'
 import { FaFan } from 'react-icons/fa'
 import api from '@utils/fetcher'
+import { getErrorMessage } from '@utils/index'
+import PaystackPayment from '@components/paystack'
 
 
 const customStyles: Modal.Styles = {
@@ -37,11 +39,13 @@ const sendRequest = "Send Request"
 const RequestModal = () => {
  
     const {modalOpen} = useAppSelector(state=>state.dashboard)
+    const user = useAppSelector(state=>state.auth.user)
     const dispatch = useAppDispatch()
     const imageInputRef = useRef<HTMLInputElement>(null)
 
     const [showUploadSpinner, setShowUploadSpinner] = useState<boolean>(false)
     const [showPayment, setShowPayment] = useState<boolean>(false)
+    const [showReceipt, setShowReceipt] = useState<boolean>(false)
     const [submitText, setSubmitText] = useState(sendRequest);
     const [formData, setFormData] = useState<NewOrderForm>({
         sampleCakeImage: "",
@@ -52,9 +56,10 @@ const RequestModal = () => {
         charges: 0,
         nameOnCake: "",
     });
+    const [orderId, setOrderId] = useState<string>("")
 
     const showImagePicker = ()=> {
-        if(showUploadSpinner)return
+        if(showUploadSpinner || submitText !== sendRequest)return
         imageInputRef?.current?.click()
     }
   const onRequestClose = () => {
@@ -97,12 +102,16 @@ const RequestModal = () => {
           return;
       }
       try {
-            const {data} = await api.post(ROUTES.API.ORDER, {...formData})
-            toast.success(data?.msg)
-      } catch (error) {
-          toast.error("Error occurred while validating your inputs. Please try again later")
-          console.log(error);
-      }
+          setSubmitText("Loading...")
+          const {data} = await api.post(ROUTES.API.ORDER, {...formData})
+          toast.success(data?.msg)
+          setOrderId(data?.orderId)
+          setShowPayment(true)
+        } catch (error) {
+            toast.error(getErrorMessage(error))
+            console.log(error);
+        }
+        setSubmitText(sendRequest)
 
   }
 
@@ -165,6 +174,9 @@ const RequestModal = () => {
           />
         </div>
        <div className="bg-white-x100/70 overflow-y-scroll scrollbar-none text-white-x200 p-5 mb-5 w-[90%] mx-auto mt-14 rounded-lg shadow-lg backdrop-blur-sm h-full">
+           {showPayment ? (<div className='w-full h-full flex justify-center items-center'>
+               <PaystackPayment amount={formData.charges*100} email={user?.email?? ""} orderId={orderId} onComplete={(msg)=>console.log(msg)}/>
+           </div>) : (
            <form onSubmit={handleRequest} className="flex flex-col space-y-4">
            <div className="flex flex-col self-center">
            <div className="h-32 w-32 rounded relative">
@@ -200,6 +212,7 @@ const RequestModal = () => {
                 name="nameOnCake"
                 value={formData.nameOnCake}
                 onChange={handleChange}
+                disabled={submitText !== sendRequest}
               />
           </div>
            <div className="flex flex-col">
@@ -211,6 +224,7 @@ const RequestModal = () => {
                 name="deliveryDate"
                 value={formData.deliveryDate}
                 onChange={handleChange}
+                disabled={submitText !== sendRequest}
               />
           </div>
            <div className="flex flex-col">
@@ -222,6 +236,7 @@ const RequestModal = () => {
                 name="deliveryAddress"
                 value={formData.deliveryAddress}
                 onChange={handleChange}
+                disabled={submitText !== sendRequest}
               />
           </div>
            <div className="flex flex-col">
@@ -234,6 +249,7 @@ const RequestModal = () => {
                 name="cakeColors"
                 value={formData.cakeColors}
                 onChange={handleChange}
+                disabled={submitText !== sendRequest}
               />
           </div>
            <div className="flex flex-col">
@@ -245,6 +261,7 @@ const RequestModal = () => {
                 name="cakeSize"
                 value={formData.cakeSize}
                 onChange={handleChangeSelect}
+                disabled={submitText !== sendRequest}
               />
           </div>
           <div className="text-center mb-5">
@@ -257,6 +274,7 @@ const RequestModal = () => {
               
             </div>
            </form>
+           )}
        </div>
       </div>
     </Modal>

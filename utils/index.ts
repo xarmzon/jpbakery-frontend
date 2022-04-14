@@ -48,6 +48,19 @@ export const validateAccountForm = (formData: RegForm, cPass = false) => {
     return errors;
   };
 
+
+  export const formatPrice = (price: string | number) => {
+    let priceToConvert: number;
+    if (typeof price === "string") {
+      priceToConvert = parseFloat(price);
+    } else {
+      priceToConvert = price;
+    }
+  
+    return new Intl.NumberFormat("en-Us").format(priceToConvert);
+  };
+  
+
  
 export const getErrorMessage = (e: any) => {
   return e?.response?.msg
