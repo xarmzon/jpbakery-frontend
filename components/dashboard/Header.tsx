@@ -2,6 +2,7 @@ import Button from '@components/Button'
 import { toggleModal, toggleNav } from '@redux/slice/dashboard'
 import { useAppDispatch, useAppSelector } from '@redux/store'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import React from 'react'
 import { BiBell, BiMenu } from 'react-icons/bi'
 
@@ -9,6 +10,7 @@ const Header = () => {
   const { loggedIn, loading, user } = useAppSelector((state) => state.auth)
   const { navOpen } = useAppSelector((state) => state.dashboard)
   const dispatch = useAppDispatch()
+  const router = useRouter()
 
   const openRequestModal = () => {
     dispatch(
@@ -36,11 +38,14 @@ const Header = () => {
         </div>
         <div className="flex items-center space-x-5">
           <BiBell className="text-xl text-gray-500" />
-          <Button
-            onClick={openRequestModal}
-            text="Request"
-            className="px-3 py-1"
-          />
+
+          {router.asPath.split('/').length < 3 && (
+            <Button
+              onClick={openRequestModal}
+              text="Request"
+              className="px-3 py-1"
+            />
+          )}
         </div>
       </div>
       <div className="flex flex-1 items-center justify-end">
