@@ -127,27 +127,15 @@ const PaystackPayment = ({
         Reference Number<span className="block italic">{refNum}</span>
       </p>
       {
-          !paymentText.includes(".") && 
+          !paymentText.includes(".") ?
       <Button 
         text={paymentText}
         onClick={performPayment}
-      />
-      }
-      {/* <button
-        type="button"
-        className="py-2 px-4 bg-primary text-white hover:bg-white hover:text-primary transition duration-500"
-      >
-        {} 
-      </button> */}
-      {
-          paymentText.includes(".") && (
-            <div className="">
-            <Loader text={paymentText}/>
-        </div>
-          )
+      />:  <div className="">
+      <Loader text={paymentText}/>
+  </div>
       }
      <div className="h-12 w-full relative">
-
       <Image
       alt="paystack"
       layout="fill"
