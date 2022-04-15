@@ -8,17 +8,21 @@ interface IListItem {
   liClass?: string
   aClass?: string
 }
-const ListItem = ({ icon, link, text, liClass="", aClass="" }: IListItem) => {
+const ListItem = ({
+  icon,
+  link,
+  text,
+  liClass = '',
+  aClass = '',
+}: IListItem) => {
   return (
     <li
-    title={text}
-      className={`group flex flex-col items-center justify-center text-primary-d1 ${
-        liClass}`}
+      title={text}
+      className={`group flex flex-col items-center justify-center text-primary-d1 ${liClass}`}
     >
       <Link href={link}>
         <a
-          className={`relative  flex h-full w-full items-center justify-center space-x-1 text-center transition-all duration-700 group-hover:opacity-80 ${
-            aClass}`}
+          className={`relative  flex h-full w-full items-center justify-center space-x-1 text-center transition-all duration-700 group-hover:opacity-80 ${aClass}`}
         >
           {icon && (
             <span className="text-2xl md:text-base xl:text-2xl">{icon}</span>

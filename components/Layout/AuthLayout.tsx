@@ -4,8 +4,6 @@ import Logo from '@components/Logo'
 import { useAppSelector } from '@redux/store'
 import { ROUTES } from '@utils/constants'
 import { NextSeo } from 'next-seo'
-import React, { useEffect } from 'react'
-import { BiKey } from 'react-icons/bi'
 interface IAuthLayout {
   children: React.ReactNode
   title?: string

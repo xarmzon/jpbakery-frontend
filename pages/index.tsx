@@ -1,7 +1,7 @@
 import GeneralLayout from '@components/Layout/GeneralLayout'
-import About from '@components/sections/Homepage/About'
-import Gallery from '@components/sections/Homepage/Gallery'
-import Hero from '@components/sections/Homepage/Hero'
+import About from '@components/sections/About'
+import Gallery from '@components/sections/Gallery'
+import Hero from '@components/sections/Hero'
 import type { NextPage } from 'next'
 
 const Home: NextPage = () => {

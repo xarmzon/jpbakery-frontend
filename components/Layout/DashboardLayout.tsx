@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '@redux/store'
 import { MESSAGES, ROUTES } from '@utils/constants'
 import { NextSeo } from 'next-seo'
 import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import toast from 'react-hot-toast'
 
 interface IDashboardLayout {
