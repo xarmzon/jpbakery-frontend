@@ -94,7 +94,7 @@ const Sidebar = () => {
               <span
                 className={`text-base lg:text-xl ${
                   navOpen ? 'block' : 'hidden transition-all duration-500'
-                } transition-all duration-500 lg:block`}
+                } text-gray-600 transition-all duration-500 lg:block`}
               >
                 Logout
               </span>

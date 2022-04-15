@@ -8,7 +8,13 @@ import { useEffect } from 'react'
 import { SWRConfig } from 'swr'
 import { swrFetcher } from '@utils/fetcher'
 import store from '@redux/store'
-import { addToken, addUser, setLoading, setLoginState } from '@redux/slice/auth'
+import {
+  addToken,
+  addUser,
+  setLoading,
+  setLoadingLogout,
+  setLoginState,
+} from '@redux/slice/auth'
 import { DEFAULT_SEO } from '@utils/constants'
 
 import 'nprogress/nprogress.css'
@@ -35,9 +41,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [router])
 
   useEffect(() => {
+    if (store.getState().auth.loadingLogout) {
+      store.dispatch(setLoadingLogout(false))
+    }
     store.dispatch(setLoading(true))
     const userString = localStorage.getItem('user')
-    const userData = userString && userString.length > 0 ? JSON.parse(userString) : undefined
+    const userData =
+      userString && userString.length > 0 ? JSON.parse(userString) : undefined
 
     const token = localStorage.getItem('token')
     if (token && userData && !store.getState().auth.loggedIn) {
@@ -45,7 +55,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       store.dispatch(setLoginState(true))
       store.dispatch(addToken(token))
     }
-    if (!token && userData || token && !userData) {
+    if ((!token && userData) || (token && !userData)) {
       store.dispatch(addUser())
       store.dispatch(setLoginState(false))
       localStorage.removeItem('user')
@@ -64,7 +74,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       >
         <Component {...pageProps} key={router.route} />
       </SWRConfig>
-      <Toaster />
+      <Toaster toastOptions={{ duration: 5000 }} />
     </Provider>
   )
 }

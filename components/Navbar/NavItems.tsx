@@ -1,5 +1,4 @@
 import { NavLink } from '@utils/types'
-import React from 'react'
 import ListItem from './ListItem'
 
 interface INavItems {

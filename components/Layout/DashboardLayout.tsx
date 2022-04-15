@@ -15,7 +15,10 @@ interface IDashboardLayout {
   title?: string
 }
 
-const DashboardLayout = ({ children, title }: IDashboardLayout) => {
+const DashboardLayout = ({
+  children,
+  title = 'Dashboard',
+}: IDashboardLayout) => {
   const { loggedIn, loading, user } = useAppSelector((state) => state.auth)
   const dispatch = useAppDispatch()
   const router = useRouter()
@@ -38,7 +41,7 @@ const DashboardLayout = ({ children, title }: IDashboardLayout) => {
           <>
             <Header />
             <Sidebar />
-            <Main>{children}</Main>
+            <Main title={title}>{children}</Main>
           </>
         )}
         <DashboardModal />

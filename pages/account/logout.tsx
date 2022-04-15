@@ -1,11 +1,11 @@
 import AuthLayout from '@components/Layout/AuthLayout'
 import Loader from '@components/Loader'
-import { addUser, setLoading, setLoginState } from '@redux/slice/auth'
+import { addUser, setLoadingLogout, setLoginState } from '@redux/slice/auth'
 import { useAppDispatch, useAppSelector } from '@redux/store'
-import { MESSAGES, ROUTES } from '@utils/constants'
+import { MESSAGES } from '@utils/constants'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import toast from 'react-hot-toast'
 
 const LogoutPage: NextPage = () => {
@@ -13,7 +13,7 @@ const LogoutPage: NextPage = () => {
   const loggedIn = useAppSelector((state) => state.auth.loggedIn)
   const router = useRouter()
   useEffect(() => {
-    dispatch(setLoading(true))
+    dispatch(setLoadingLogout(true))
     if (loggedIn) {
       setTimeout(() => {
         localStorage.removeItem('user')
@@ -22,7 +22,7 @@ const LogoutPage: NextPage = () => {
         dispatch(setLoginState(false))
         toast.success(MESSAGES.LOGOUT_SUCCESSFUL)
         router.push('/')
-      }, 3000)
+      }, 2000)
     } else {
       router.push('/')
     }

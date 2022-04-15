@@ -1,40 +1,4 @@
-import React from 'react'
-import { IconType } from 'react-icons'
-
-export type AuthSlice = {
-  user?: LoggedInUser
-  token: string
-  loggedIn: boolean
-  loading: boolean
-}
-
-export type Modal = {
-  open: boolean
-  type_: 'request' | 'payment' | 'receipt' | 'none'
-}
-
-export type Payment = {
-  amount: number
-  email: string
-  order: NewOrder & { id: string }
-}
-
-export type Receipt = Partial<Payment['order']> & {
-  reference: string
-}
-
-export type DashboardSlice = {
-  navOpen: boolean
-  modal: Modal
-  payment?: Payment
-  receipt?: Receipt
-}
-
-export type NavLink = {
-  icon?: React.ReactNode
-  text: string
-  link: string
-}
+import { ReactNode } from 'react'
 
 export type User = {
   fullName: string
@@ -59,6 +23,43 @@ export type Order = {
 export type NewOrder = Omit<Order, 'createdAt' | 'user' | '_id'>
 export type NewOrderForm = NewOrder
 
+export type AuthSlice = {
+  user?: LoggedInUser
+  token: string
+  loggedIn: boolean
+  loading: boolean
+  loadingLogout: boolean
+}
+
+export type Modal = {
+  open: boolean
+  type_: 'request' | 'payment' | 'receipt' | 'none'
+}
+
+export type Payment = {
+  amount: number
+  email: string
+  order: NewOrder & { id: string }
+}
+
+export type OrderReceipt = Partial<Omit<Order, 'user'>> & {
+  reference?: string
+  status?: string
+}
+
+export type DashboardSlice = {
+  navOpen: boolean
+  modal: Modal
+  payment?: Payment
+  receipt?: OrderReceipt
+}
+
+export type NavLink = {
+  icon?: ReactNode
+  text: string
+  link: string
+}
+
 export type LoggedInUser = User & {
   role: number
   id: string
@@ -76,3 +77,13 @@ export interface IError {
   msg: string
 }
 export interface IRegError extends IError {}
+
+export interface IValue {
+  value: string
+}
+export type IHeader = string
+
+export interface IData {
+  values: IValue[]
+  id?: string
+}

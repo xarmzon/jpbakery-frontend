@@ -12,7 +12,7 @@ export const USER_TYPES = {
   ADMIN: 1,
   CLIENT: 0,
 }
-
+export const PER_PAGE = 10
 export const ALLOWED_EXTENSIONS_FOR_DP = ['jpeg', 'jpg', 'png']
 export const ALLOWED_FILE_SIZE_DP = 1024 * 80 // 80kb
 export const PASSWORD_MIN = 6
@@ -42,6 +42,7 @@ export const ROUTES = {
     USER: 'user/',
     ORDER: 'order/',
     PAYMENT: 'payment/',
+    OVERVIEW: 'user/overview/',
   },
 }
 

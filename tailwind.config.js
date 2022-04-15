@@ -50,7 +50,7 @@ module.exports = {
           d3: '#0e0f22',
         },
         white: {
-          DEFAULT: "#fff",
+          DEFAULT: '#fff',
           light: '#fbfffe',
           x100: '#f5f7fb',
           x200: '#f5f7f9',

@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    @apply !scroll-smooth;
+  }
+}
 ::-webkit-scrollbar-thumb {
   @apply !rounded-lg;
 }
